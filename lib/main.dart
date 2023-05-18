@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Tiergarten Kleve',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(244, 123 , 32, 100)),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Color.fromRGBO(244, 123, 32, 100)),
         useMaterial3: false,
       ),
       home: const MyHomePage(title: 'Audioführer'),
@@ -49,14 +51,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        
         title: Text(widget.title),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-             SizedBox(height: 10),
+            SizedBox(height: 10),
             const Text(
               'Ich begleite dich heute durch den Tiergarten',
               textAlign: TextAlign.center,
@@ -71,17 +72,21 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 print('Pressed');
               },
-              child: Text('Abenteuertour', style: TextStyle(fontSize: 24),
+              child: Text(
+                'Abenteuertour',
+                style: TextStyle(fontSize: 24),
               ),
-              ),
-              SizedBox(height: 10),
-              ElevatedButton(
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
               onPressed: () {
                 print('Pressed');
               },
-              child: Text('Standardtour', style: TextStyle(fontSize: 24),
+              child: Text(
+                'Standardtour',
+                style: TextStyle(fontSize: 24),
               ),
-              ),
+            ),
           ],
         ),
       ),
