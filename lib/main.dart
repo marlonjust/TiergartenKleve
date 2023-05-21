@@ -1,95 +1,156 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:zoo/abenteuermodus.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tiergarten Kleve',
-      theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromRGBO(244, 123, 32, 100)),
-        useMaterial3: false,
-      ),
-      home: const MyHomePage(title: 'Audioführer'),
+      theme: new ThemeData(
+          scaffoldBackgroundColor: const Color(0xFFF8EFE9),
+          appBarTheme: AppBarTheme(color: Colors.white)),
+      home: Introduction(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+class Introduction extends StatelessWidget {
+  void navigateToSecondPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Auswahl()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: 10),
-            const Text(
-              'Ich begleite dich heute durch den Tiergarten',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-            ),
-            Text(
-              'Wähle eine Tour aus:',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                print('Pressed');
-              },
-              child: Text(
-                'Abenteuertour',
-                style: TextStyle(fontSize: 24),
+        appBar: AppBar(),
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(20, 50, 20, 300),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "Hallo, ich bin heute dein Audioguideführer",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFF640000)),
+                textAlign: TextAlign.center,
               ),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                print('Pressed');
-              },
-              child: Text(
-                'Standardtour',
-                style: TextStyle(fontSize: 24),
+              Text(
+                "Heute erwarten dich viele spannende und interessante Fakten über die Bewohner des Tiergartens.",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF640000)),
+                textAlign: TextAlign.center,
               ),
-            ),
-          ],
-        ),
-      ),
+              Text(
+                "Wähle im nächsten Schritt eine Tour aus!",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF640000)),
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.white)),
+                onPressed: () => navigateToSecondPage(context),
+                child: Text(
+                  'Zur Auswahl',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFF640000)),
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
+class Auswahl extends StatelessWidget {
+  void navigateToAbenteuer(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Abenteuertour()),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(),
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 400),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "Hier siehst du nun alle Audioguides, such dir einen aus und wir fangen gleich an",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFF640000)),
+                textAlign: TextAlign.center,
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.white)),
+                onPressed: () => navigateToAbenteuer(context),
+                child: Text(
+                  'Abenteuertour',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF640000)),
+                ),
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.white)),
+                onPressed: () {},
+                child: Text(
+                  'Kleine Tour',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF640000)),
+                ),
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.white)),
+                onPressed: () {},
+                child: Text(
+                  'Große Tour',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF640000)),
+                ),
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.white)),
+                onPressed: () {},
+                child: Text(
+                  'Freie Tour',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF640000)),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }
