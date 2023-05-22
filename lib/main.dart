@@ -37,28 +37,6 @@ class Introduction extends StatelessWidget {
               fit: BoxFit.contain,
               height: 40,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 107),
-              child: Row(
-                children: [
-                  Image.asset(
-                    "assets/images/FlagNE.png",
-                    fit: BoxFit.contain,
-                    height: 25,
-                  ),
-                  Image.asset(
-                    "assets/images/FlagGB.png",
-                    fit: BoxFit.contain,
-                    height: 25,
-                  ),
-                  Image.asset(
-                    "assets/images/FlagDE.png",
-                    fit: BoxFit.contain,
-                    height: 25,
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
         toolbarHeight: 62,
