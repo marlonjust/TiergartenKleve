@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zoo/abenteuermodus.dart';
+import 'package:zoo/auswahlmenu.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,8 +10,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Tiergarten Kleve',
-      theme: new ThemeData(
+      theme: ThemeData(
           scaffoldBackgroundColor: const Color(0xFFF8EFE9),
           appBarTheme: AppBarTheme(color: Colors.white)),
       home: Introduction(),
@@ -20,21 +22,58 @@ class MyApp extends StatelessWidget {
 
 class Introduction extends StatelessWidget {
   void navigateToSecondPage(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Auswahl()),
+    Navigator.push( context, MaterialPageRoute(builder: (context) => MyApp2()),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(20, 50, 20, 300),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Image.asset(
+              "assets/images/Appbar Logo.png",
+              fit: BoxFit.contain,
+              height: 40,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 107),
+              child: Row(
+                children: [
+                  Image.asset(
+                    "assets/images/FlagNE.png",
+                    fit: BoxFit.contain,
+                    height: 25,
+                  ),
+                  Image.asset(
+                    "assets/images/FlagGB.png",
+                    fit: BoxFit.contain,
+                    height: 25,
+                  ),
+                  Image.asset(
+                    "assets/images/FlagDE.png",
+                    fit: BoxFit.contain,
+                    height: 25,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        toolbarHeight: 62,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage("assets/images/Background.png"),
+          fit: BoxFit.fill,
+        )),
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(20, 70, 20, 0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Image.asset('assets/images/Logo.png', width: 200, height: 200),
               Text(
                 "Hallo, ich bin heute dein Audioguideführer",
                 style: TextStyle(
@@ -49,7 +88,7 @@ class Introduction extends StatelessWidget {
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: Color(0xFF640000)),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
               ),
               Text(
                 "Wähle im nächsten Schritt eine Tour aus!",
@@ -57,100 +96,40 @@ class Introduction extends StatelessWidget {
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: Color(0xFF640000)),
+                textAlign: TextAlign.left,
               ),
-              ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.white)),
-                onPressed: () => navigateToSecondPage(context),
-                child: Text(
-                  'Zur Auswahl',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFF640000)),
+              Padding(
+                padding: const EdgeInsets.only(top: 190),
+                child: Container(
+                  width: 150,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(color: Color(0xFFF8EFE9), spreadRadius: 10),
+                    ],
+                  ),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        elevation: MaterialStateProperty.all(0),
+                        backgroundColor:
+                            MaterialStateProperty.all(Color(0xFFF8EFE9))),
+                    onPressed: () => navigateToSecondPage(context),
+                    child: Text(
+                      'Zur Auswahl',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF640000)),
+                    ),
+                  ),
                 ),
               ),
             ],
           ),
-        ));
-  }
-}
-
-class Auswahl extends StatelessWidget {
-  void navigateToAbenteuer(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Abenteuertour()),
+        ),
+      ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(),
-        body: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 400),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                "Hier siehst du nun alle Audioguides, such dir einen aus und wir fangen gleich an",
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF640000)),
-                textAlign: TextAlign.center,
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.white)),
-                onPressed: () => navigateToAbenteuer(context),
-                child: Text(
-                  'Abenteuertour',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF640000)),
-                ),
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.white)),
-                onPressed: () {},
-                child: Text(
-                  'Kleine Tour',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF640000)),
-                ),
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.white)),
-                onPressed: () {},
-                child: Text(
-                  'Große Tour',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF640000)),
-                ),
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.white)),
-                onPressed: () {},
-                child: Text(
-                  'Freie Tour',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF640000)),
-                ),
-              ),
-            ],
-          ),
-        ));
   }
 }
