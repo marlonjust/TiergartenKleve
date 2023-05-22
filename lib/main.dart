@@ -82,24 +82,33 @@ class Introduction extends StatelessWidget {
                     color: Color(0xFF640000)),
                 textAlign: TextAlign.center,
               ),
-              Text(
-                "Heute erwarten dich viele spannende und interessante Fakten über die Bewohner des Tiergartens.",
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF640000)),
-                textAlign: TextAlign.left,
-              ),
-              Text(
-                "Wähle im nächsten Schritt eine Tour aus!",
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF640000)),
-                textAlign: TextAlign.left,
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Text(
+                  "Heute erwarten dich viele spannende und interessante Fakten über die Bewohner des Tiergartens.",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF640000)),
+                  textAlign: TextAlign.left,
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 190),
+                padding: const EdgeInsets.only(top: 10),
+                child: SizedBox(
+                  width: 400,
+                  child: Text(
+                    "Wähle im nächsten Schritt eine Tour aus!",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF640000)),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 170),
                 child: Container(
                   width: 150,
                   height: 50,
