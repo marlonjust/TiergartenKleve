@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 
 class Introduction extends StatelessWidget {
   void navigateToSecondPage(BuildContext context) {
-    Navigator.push( context, MaterialPageRoute(builder: (context) => MyApp2()),
+    Navigator.pushReplacement( context, MaterialPageRoute(builder: (context) => MyApp2()),
     );
   }
 
@@ -37,6 +37,28 @@ class Introduction extends StatelessWidget {
               fit: BoxFit.contain,
               height: 40,
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 107),
+              child: Row(
+                children: [
+                  Image.asset(
+                    "assets/images/FlagNE.png",
+                    fit: BoxFit.contain,
+                    height: 25,
+                  ),
+                  Image.asset(
+                    "assets/images/FlagGB.png",
+                    fit: BoxFit.contain,
+                    height: 25,
+                  ),
+                  Image.asset(
+                    "assets/images/FlagDE.png",
+                    fit: BoxFit.contain,
+                    height: 25,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
         toolbarHeight: 62,
@@ -44,11 +66,11 @@ class Introduction extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-          image: AssetImage("assets/images/Background.png"),
+          image: AssetImage("assets/images/background.png"),
           fit: BoxFit.fill,
         )),
         child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(20, 70, 20, 0),
+          padding: const EdgeInsetsDirectional.fromSTEB(30, 70, 30, 0),
           child: Column(
             children: <Widget>[
               Image.asset('assets/images/Logo.png', width: 200, height: 200),
@@ -62,18 +84,20 @@ class Introduction extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10),
-                child: Text(
-                  "Heute erwarten dich viele spannende und interessante Fakten über die Bewohner des Tiergartens.",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF640000)),
-                  textAlign: TextAlign.left,
+                child: Container(
+                  child: Text(
+                    "Heute erwarten dich viele spannende und interessante Fakten über die Bewohner des Tiergartens.",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF640000)),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10),
-                child: SizedBox(
+                child: Container(
                   width: 400,
                   child: Text(
                     "Wähle im nächsten Schritt eine Tour aus!",

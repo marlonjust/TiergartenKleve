@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:zoo/main.dart';
+import 'package:zoo/abenteuermodus.dart';
 
 class MyApp2 extends StatelessWidget {
   @override
@@ -18,9 +19,9 @@ class MyApp2 extends StatelessWidget {
 
 class Auswahl extends StatelessWidget {
   void navigateToSecondPage(BuildContext context) {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => Introduction()),
+      MaterialPageRoute(builder: (context) => Abenteuertour()),
     );
   }
 
@@ -64,7 +65,7 @@ class Auswahl extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-          image: AssetImage("assets/images/Background.png"),
+          image: AssetImage("assets/images/background.png"),
           fit: BoxFit.fill,
         )),
         child: Column(children: [
