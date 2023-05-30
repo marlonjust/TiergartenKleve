@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:zoo/main.dart';
 import 'package:zoo/abenteuermodus.dart';
 
+const cream = Color(0xFFF8EFE9);
+const orange = Color(0xFFF47B20);
+const dorange = Color(0xFF640000);
+
 class MyApp2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -37,7 +41,7 @@ class Auswahl extends StatelessWidget {
               height: 40,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 107),
+              padding: const EdgeInsets.only(left: 70),
               child: Row(
                 children: [
                   Image.asset(
@@ -73,7 +77,7 @@ class Auswahl extends StatelessWidget {
             children: [
               Image.asset("assets/images/Logo.png", width: 125, height: 125),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20, 10, 0, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                 child: Container(
                     height: 110,
                     width: 230,
@@ -81,7 +85,7 @@ class Auswahl extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                       color: Colors.white,
                       boxShadow: [
-                        BoxShadow(color: Color(0xFFF8EFE9), spreadRadius: 10),
+                        BoxShadow(color: cream, spreadRadius: 10),
                       ],
                     ),
                     child: Center(
@@ -92,7 +96,7 @@ class Auswahl extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
-                              color: Color(0xFF640000)),
+                              color: dorange),
                           textAlign: TextAlign.left,
                         ),
                       ),
@@ -105,7 +109,7 @@ class Auswahl extends StatelessWidget {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(35, 40, 0, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(30, 40, 0, 0),
                     child: Container(
                       width: 225,
                       height: 30,
@@ -127,7 +131,7 @@ class Auswahl extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
-                              color: Color(0xFF640000)),
+                              color: dorange),
                         ),
                       ),
                     ),
@@ -137,15 +141,15 @@ class Auswahl extends StatelessWidget {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(30, 40, 0, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(20, 40, 0, 0),
                     child: Row(
                       children: [
-                        Icon(Icons.timer, color: Color(0xFFF47B20),size: 40),
+                        Icon(Icons.timer, color: orange,size: 40),
                         Text("2,5h",
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF640000)),
+                                color: dorange),
                           ),
                       ],
                     ),
@@ -159,7 +163,7 @@ class Auswahl extends StatelessWidget {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(35, 40, 0, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(30, 40, 0, 0),
                     child: Container(
                       width: 225,
                       height: 30,
@@ -181,7 +185,7 @@ class Auswahl extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
-                              color: Color(0xFF640000)),
+                              color: dorange),
                         ),
                       ),
                     ),
@@ -191,15 +195,15 @@ class Auswahl extends StatelessWidget {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(30, 40, 0, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(20, 40, 0, 0),
                     child: Row(
                       children: [
-                        Icon(Icons.timer, color: Color(0xFFF47B20),size: 40),
+                        Icon(Icons.timer, color: orange,size: 40),
                         Text("2,5h",
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF640000)),
+                                color: dorange),
                           ),
                       ],
                     ),
@@ -213,7 +217,7 @@ class Auswahl extends StatelessWidget {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(35, 40, 0, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(30, 40, 0, 0),
                     child: Container(
                       width: 225,
                       height: 30,
@@ -235,7 +239,7 @@ class Auswahl extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
-                              color: Color(0xFF640000)),
+                              color: dorange),
                         ),
                       ),
                     ),
@@ -245,15 +249,15 @@ class Auswahl extends StatelessWidget {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(30, 40, 0, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(20, 40, 0, 0),
                     child: Row(
                       children: [
-                        Icon(Icons.timer, color: Color(0xFFF47B20),size: 40),
+                        Icon(Icons.timer, color: orange,size: 40),
                         Text("2,5h",
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF640000)),
+                                color: dorange),
                           ),
                       ],
                     ),
@@ -267,7 +271,7 @@ class Auswahl extends StatelessWidget {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(35, 40, 0, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(30, 40, 0, 0),
                     child: Container(
                       width: 225,
                       height: 30,
@@ -289,7 +293,7 @@ class Auswahl extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
-                              color: Color(0xFF640000)),
+                              color: dorange),
                         ),
                       ),
                     ),
@@ -299,15 +303,15 @@ class Auswahl extends StatelessWidget {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(30, 40, 0, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(20, 40, 0, 0),
                     child: Row(
                       children: [
-                        Icon(Icons.timer, color: Color(0xFFF47B20),size: 40),
+                        Icon(Icons.timer, color: orange,size: 40),
                         Text("//",
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF640000)),
+                                color: dorange),
                           ),
                       ],
                     ),

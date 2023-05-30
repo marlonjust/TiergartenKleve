@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:zoo/abenteuermodus.dart';
 import 'package:zoo/auswahlmenu.dart';
 
+const cream = Color(0xFFF8EFE9);
+const orange = Color(0xFFF47B20);
+const dorange = Color(0xFF640000);
+
 void main() {
   runApp(MyApp());
 }
@@ -38,7 +42,7 @@ class Introduction extends StatelessWidget {
               height: 40,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 107),
+              padding: const EdgeInsets.only(left: 70),
               child: Row(
                 children: [
                   Image.asset(
@@ -90,7 +94,7 @@ class Introduction extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xFF640000)),
+                        color: dorange),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -104,13 +108,13 @@ class Introduction extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xFF640000)),
+                        color: dorange),
                     textAlign: TextAlign.left,
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 170),
+                padding: const EdgeInsets.only(top: 110),
                 child: Container(
                   width: 150,
                   height: 50,
@@ -118,7 +122,7 @@ class Introduction extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
                     boxShadow: [
-                      BoxShadow(color: Color(0xFFF8EFE9), spreadRadius: 10),
+                      BoxShadow(color: cream, spreadRadius: 10),
                     ],
                   ),
                   child: ElevatedButton(
@@ -132,7 +136,7 @@ class Introduction extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
-                          color: Color(0xFF640000)),
+                          color: dorange),
                     ),
                   ),
                 ),
