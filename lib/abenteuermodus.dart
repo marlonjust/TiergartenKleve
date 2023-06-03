@@ -11,7 +11,13 @@ import 'dart:async';
 const cream = Color(0xFFF8EFE9);
 const orange = Color(0xFFF47B20);
 const dorange = Color(0xFF640000);
-const animalName = '';
+String animalNameOne = '';
+String animalNameTwo = '';
+String animalNameThree = '';
+bool buttonOne = false;
+bool buttonTwo = false;
+bool buttonThree = false;
+bool buttonFour = false;
 int counter = 0;
 
 void main() {
@@ -44,43 +50,63 @@ class AbenteuertourClass extends State<Abenteuertour> {
   ];
 
   @override
+  void navigateToAudioplayer(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => Audioplayer()),
+    );
+  }
+
+    void navigateToAuswahl(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => Auswahl()),
+    );
+  }
+
   void dispose() {
     _mapController.dispose();
     super.dispose();
   }
 
-  void checkLocation(){
+  void checkLocation() {
     Timer.periodic(new Duration(seconds: 5), (timer) {
       checkDistance();
     });
   }
 
   void checkDistance() async {
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
     double distanceEnMetres = 10;
     for (int i = 0; i < coords.length; i++) {
-      
       double long = position.longitude;
       double lati = position.latitude;
 
       distanceEnMetres = await distance2point(
           GeoPoint(latitude: lati, longitude: long),
           GeoPoint(latitude: coords[i][1], longitude: coords[i][2]));
-
-      if (distanceEnMetres < 5) {
-        createButton(counter, coords[i][0]);
+          print(counter);
+      if (distanceEnMetres <= 500) {
+        if (counter == 0) {
+          animalNameOne = coords[i][0];
+          buttonOne = true;
+          counter++;
+          setState(() {});
+          print(counter);
+        } 
+        else if (counter == 1 && coords[i][0] != animalNameOne) {
+          animalNameTwo = coords[i][0];
+          buttonTwo = true;
+          counter++;
+          setState(() {});
+          print(counter);
+        }
       }
     }
   }
 
-  void createButton(int counter, String animal) {
-    if(counter<4){
-        
-    }
-    else{
-
-    }
-  }
+  void createButton(String animal) {}
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +170,7 @@ class AbenteuertourClass extends State<Abenteuertour> {
                   style: ButtonStyle(
                       elevation: MaterialStateProperty.all(0),
                       backgroundColor: MaterialStateProperty.all(Colors.white)),
-                  onPressed: () {},
+                  onPressed: () => navigateToAuswahl(context),
                   child: Text(
                     '<< Modus ändern',
                     style: TextStyle(
@@ -211,10 +237,61 @@ class AbenteuertourClass extends State<Abenteuertour> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(key: Key("0")),
-                Selectbutton(),
+                Visibility(
+                  visible: buttonOne,
+                  child: Container(
+                    width: 150,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: cream,
+                      boxShadow: [
+                        BoxShadow(color: cream, spreadRadius: 1),
+                      ],
+                    ),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(0),
+                          backgroundColor: MaterialStateProperty.all(cream)),
+                      onPressed: () => navigateToAudioplayer(context),
+                      child: Text(
+                        animalNameOne,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: dorange),
+                      ),
+                    ),
+                  ),
+                ),
                 SizedBox(width: 20),
-                Container(key: Key("1")),
+                Visibility(
+                  visible: buttonTwo,
+                  child: Container(
+                    width: 150,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: cream,
+                      boxShadow: [
+                        BoxShadow(color: cream, spreadRadius: 1),
+                      ],
+                    ),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(0),
+                          backgroundColor: MaterialStateProperty.all(cream)),
+                      onPressed: () => navigateToAudioplayer(context),
+                      child: Text(
+                        animalNameTwo,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: dorange),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -223,50 +300,11 @@ class AbenteuertourClass extends State<Abenteuertour> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(key: Key("2")),
-                SizedBox(width: 20),
-                Container(key: Key("3")),
+                //Ja hier muss noch was hin so nh
               ],
             ),
           ),
         ]),
-      ),
-    );
-  }
-}
-
-class Selectbutton extends StatelessWidget {
-  void navigateToSecondPage(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => Audioplayer()),
-    );
-  }
-
-  const Selectbutton({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      key: Key(""),
-      width: 150,
-      height: 40,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: cream,
-        boxShadow: [
-          BoxShadow(color: cream, spreadRadius: 1),
-        ],
-      ),
-      child: ElevatedButton(
-        style: ButtonStyle(
-            elevation: MaterialStateProperty.all(0),
-            backgroundColor: MaterialStateProperty.all(cream)),
-        onPressed: () => navigateToSecondPage(context),
-        child: Text(
-          animalName,
-          style: TextStyle(
-              fontSize: 16, fontWeight: FontWeight.w400, color: dorange),
-        ),
       ),
     );
   }
