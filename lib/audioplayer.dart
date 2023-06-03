@@ -6,14 +6,19 @@ import 'package:audioplayers/audioplayers.dart';
 const cream = Color(0xFFF8EFE9);
 const orange = Color(0xFFF47B20);
 const dorange = Color(0xFF640000);
-const animalName = "Roter Panda";
+const currentAnimal = "RoterPanda";
+const currentAnimalAudio = "audios/" + currentAnimal + ".mp3";
 
 void main() {
-  runApp(AudioplayerClass());
+  runApp(Audioplayer());
 }
 
-class AudioplayerClass extends StatelessWidget {
+class Audioplayer extends StatefulWidget {
+  const Audioplayer({super.key});
+
   @override
+  State<Audioplayer> createState() => AudioplayerClass();
+
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -26,91 +31,194 @@ class AudioplayerClass extends StatelessWidget {
   }
 }
 
-class Audioplayer extends StatelessWidget {
+class AudioplayerClass extends State<Audioplayer> {
+  final audioPlayer = AudioPlayer();
+  bool isPlaying = false;
+  Duration duration = Duration.zero;
+  Duration position = Duration.zero;
+
+  String formatTime(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    final hours = twoDigits(duration.inHours);
+    final minutes = twoDigits(duration.inMinutes.remainder(60));
+    final seconds = twoDigits(duration.inMinutes.remainder(60));
+
+    return [
+      if (duration.inHours > 0) hours,
+      minutes,
+      seconds,
+    ].join(":");
+  }
+
   void navigateToSecondPage(BuildContext context) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => MyApp2()),
+      MaterialPageRoute(builder: (context) => Abenteuertour()),
     );
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Image.asset(
-              "assets/images/Appbar Logo.png",
-              fit: BoxFit.contain,
-              height: 40,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 70),
-              child: Row(
-                children: [
-                  Image.asset(
-                    "assets/images/FlagNE.png",
-                    fit: BoxFit.contain,
-                    height: 25,
-                  ),
-                  Image.asset(
-                    "assets/images/FlagGB.png",
-                    fit: BoxFit.contain,
-                    height: 25,
-                  ),
-                  Image.asset(
-                    "assets/images/FlagDE.png",
-                    fit: BoxFit.contain,
-                    height: 25,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        toolbarHeight: 62,
-      ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage("assets/images/background.png"),
-          fit: BoxFit.fill,
-        )),
-        child: Align(
-            alignment: Alignment.topLeft,
-            child: IntrinsicHeight(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.arrow_back, color: Color(0xFF640000), size: 40),
-                      Expanded(
-                        child: Text(
-                          "Roter Panda",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w600,
-                              color: dorange),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(children: [
-                    ElevatedButton(child: Text("Press"), onPressed:(){
-                      final player=AudioPlayer();
-                      player.play(AssetSource("assets/audios/test.mp3"));
-                    },)
-                  ],
+  void initState() {
+    super.initState();
 
-                  ),
-                ],
-              ),
-            )),
-      ),
-    );
+    setAudio();
+
+    audioPlayer.onPlayerStateChanged.listen((state) {
+      setState(() {
+        isPlaying = state == PlayerState.playing;
+      });
+    });
+
+    audioPlayer.onDurationChanged.listen((newDuration) {
+      setState(() {
+        duration = newDuration;
+      });
+    });
+
+    audioPlayer.onPositionChanged.listen((newPosition) {
+      setState(() {
+        position = newPosition;
+      });
+    });
   }
+
+  Future setAudio() async{
+    audioPlayer.setSourceAsset(currentAnimalAudio);
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Row(
+            children: [
+              Image.asset(
+                "assets/images/Appbar Logo.png",
+                fit: BoxFit.contain,
+                height: 40,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 70),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/images/FlagNE.png",
+                      fit: BoxFit.contain,
+                      height: 25,
+                    ),
+                    Image.asset(
+                      "assets/images/FlagGB.png",
+                      fit: BoxFit.contain,
+                      height: 25,
+                    ),
+                    Image.asset(
+                      "assets/images/FlagDE.png",
+                      fit: BoxFit.contain,
+                      height: 25,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          toolbarHeight: 62,
+        ),
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage("assets/images/background.png"),
+            fit: BoxFit.fill,
+          )),
+          child: Align(
+              alignment: Alignment.topLeft,
+              child: IntrinsicHeight(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        ElevatedButton(
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: Color(0xFF640000),
+                              size: 40,
+                            ),
+                            onPressed: () => navigateToSecondPage(context),
+                            style: ButtonStyle(
+                                elevation: MaterialStateProperty.all(0),
+                                backgroundColor: MaterialStateProperty.all(
+                                    Colors.transparent))),
+                        Expanded(
+                          child: Text(
+                            "Roter Panda",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                                color: dorange),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.asset("assets/images/Roter Panda.png",
+                              width: double.infinity,
+                              height: 250,
+                              fit: BoxFit.cover),
+                        ),
+                        const SizedBox(height: 32),
+                        const Text(
+                          currentAnimal,
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        Slider(
+                          min: 0,
+                          max: duration.inSeconds.toDouble(),
+                          value: position.inSeconds.toDouble(),
+                          activeColor: Color(0xFFF47B20),
+                          inactiveColor: Color.fromARGB(255, 237, 201, 174),
+                          onChanged: (value) async {
+                            final position = Duration(seconds: value.toInt());
+                            await audioPlayer.seek(position);
+
+                            await audioPlayer.resume();
+                          },
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(formatTime(position)),
+                                Text(formatTime(duration)),
+                              ],
+                            )),
+                        CircleAvatar(
+                          backgroundColor: Color(0xFF640000),
+                            radius: 35,
+                            child: IconButton(
+                              
+                              icon: Icon(
+                                  isPlaying ? Icons.pause : Icons.play_arrow, color: Color(0xFFF8EFE9)),
+                              iconSize: 50,
+                              onPressed: () async {
+                                if (isPlaying) {
+                                  await audioPlayer.pause();
+                                } else {
+                                  await audioPlayer.resume();
+                                }
+                              },
+                            ))
+                      ],
+                    ),
+                  ],
+                ),
+              )),
+        ),
+      );
 }

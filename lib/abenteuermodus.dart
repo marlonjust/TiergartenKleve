@@ -1,14 +1,18 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:zoo/abenteuermodus.dart';
 import 'package:zoo/audioplayer.dart';
 import 'package:zoo/auswahlmenu.dart';
 import 'package:geolocator/geolocator.dart';
+import 'dart:async';
 
 const cream = Color(0xFFF8EFE9);
 const orange = Color(0xFFF47B20);
 const dorange = Color(0xFF640000);
 const animalName = '';
+int counter = 0;
 
 void main() {
   runApp(Abenteuertour());
@@ -34,24 +38,48 @@ class Abenteuertour extends StatefulWidget {
 class AbenteuertourClass extends State<Abenteuertour> {
   final _mapController = MapController(initMapWithUserPosition: true);
 
+  List<List<dynamic>> coords = [
+    ['Roter Panda', 51.7987607049, 6.12185299919],
+    ['Maus', 51.7984312277, 6.12212873616],
+  ];
+
   @override
   void dispose() {
     _mapController.dispose();
     super.dispose();
   }
 
-  void checkLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    print(GeolocatorPlatform.instance.distanceBetween(position.latitude,
-        position.longitude, position.latitude, position.longitude));
+  void checkLocation(){
+    Timer.periodic(new Duration(seconds: 5), (timer) {
+      checkDistance();
+    });
   }
 
   void checkDistance() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    print(GeolocatorPlatform.instance.distanceBetween(position.latitude,
-        position.longitude, position.latitude, position.longitude));
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
+    double distanceEnMetres = 10;
+    for (int i = 0; i < coords.length; i++) {
+      
+      double long = position.longitude;
+      double lati = position.latitude;
+
+      distanceEnMetres = await distance2point(
+          GeoPoint(latitude: lati, longitude: long),
+          GeoPoint(latitude: coords[i][1], longitude: coords[i][2]));
+
+      if (distanceEnMetres < 5) {
+        createButton(counter, coords[i][0]);
+      }
+    }
+  }
+
+  void createButton(int counter, String animal) {
+    if(counter<4){
+        
+    }
+    else{
+
+    }
   }
 
   @override
@@ -162,6 +190,7 @@ class AbenteuertourClass extends State<Abenteuertour> {
                       await Future.delayed(const Duration(seconds: 1),
                           () async {
                         await _mapController.currentLocation();
+                        checkLocation();
                       });
                     }
                   },
@@ -182,9 +211,10 @@ class AbenteuertourClass extends State<Abenteuertour> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Container(key: Key("0")),
                 Selectbutton(),
                 SizedBox(width: 20),
-                Selectbutton(),
+                Container(key: Key("1")),
               ],
             ),
           ),
@@ -193,9 +223,9 @@ class AbenteuertourClass extends State<Abenteuertour> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Selectbutton(),
+                Container(key: Key("2")),
                 SizedBox(width: 20),
-                Selectbutton(),
+                Container(key: Key("3")),
               ],
             ),
           ),
@@ -206,7 +236,7 @@ class AbenteuertourClass extends State<Abenteuertour> {
 }
 
 class Selectbutton extends StatelessWidget {
-    void navigateToSecondPage(BuildContext context) {
+  void navigateToSecondPage(BuildContext context) {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => Audioplayer()),
@@ -214,10 +244,10 @@ class Selectbutton extends StatelessWidget {
   }
 
   const Selectbutton({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: Key(""),
       width: 150,
       height: 40,
       decoration: BoxDecoration(

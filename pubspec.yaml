@@ -16,6 +16,7 @@ dependencies:
   geolocator: ^9.0.2
   audioplayers: ^4.0.1
   flutter_osm_plugin: ^0.54.1
+  latlng: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -29,4 +30,4 @@ flutter:
   
   assets:
     - assets/images/
-    - assets/audios/test.mp3
+    - assets/audios/
