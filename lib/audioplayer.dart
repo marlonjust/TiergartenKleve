@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:zoo/abenteuermodus.dart';
+import 'package:zoo/abenteuertour.dart';
 import 'package:zoo/auswahlmenu.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 const cream = Color(0xFFF8EFE9);
 const orange = Color(0xFFF47B20);
 const dorange = Color(0xFF640000);
-const currentAnimal = "RoterPanda";
-const currentAnimalAudio = "audios/" + currentAnimal + ".mp3";
 
-void main() {
-  runApp(Audioplayer());
-}
 
 class Audioplayer extends StatefulWidget {
-  const Audioplayer({super.key});
+  final String animalName;
+  Audioplayer({required this.animalName});
 
   @override
   State<Audioplayer> createState() => AudioplayerClass();
@@ -26,7 +22,6 @@ class Audioplayer extends StatefulWidget {
       theme: ThemeData(
           scaffoldBackgroundColor: const Color(0xFFF8EFE9),
           appBarTheme: AppBarTheme(color: Colors.white)),
-      home: Audioplayer(),
     );
   }
 }
@@ -83,7 +78,9 @@ class AudioplayerClass extends State<Audioplayer> {
   }
 
   Future setAudio() async{
-    audioPlayer.setSourceAsset(currentAnimalAudio);
+    String animalNameSpace = animalName.replaceAll(' ', '');
+    audioPlayer.setSourceAsset("audios/"+animalNameSpace+".mp3");
+    print(animalName);
   }
 
   @override
@@ -150,7 +147,7 @@ class AudioplayerClass extends State<Audioplayer> {
                                     Colors.transparent))),
                         Expanded(
                           child: Text(
-                            "Roter Panda",
+                            animalName,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 24,
@@ -165,14 +162,14 @@ class AudioplayerClass extends State<Audioplayer> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20),
-                          child: Image.asset("assets/images/Roter Panda.png",
+                          child: Image.asset("assets/images/"+animalName+".png",
                               width: double.infinity,
                               height: 250,
                               fit: BoxFit.cover),
                         ),
-                        const SizedBox(height: 32),
-                        const Text(
-                          currentAnimal,
+                        SizedBox(height: 32),
+                        Text(
+                          animalName,
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),
                         ),

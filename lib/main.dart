@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zoo/abenteuermodus.dart';
+import 'package:zoo/abenteuertour.dart';
 import 'package:zoo/auswahlmenu.dart';
 
 const cream = Color(0xFFF8EFE9);

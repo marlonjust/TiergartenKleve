@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:zoo/abenteuertour.dart';
 import 'package:zoo/main.dart';
-import 'package:zoo/abenteuermodus.dart';
+import 'package:zoo/freietour.dart';
 
 const cream = Color(0xFFF8EFE9);
 const orange = Color(0xFFF47B20);
@@ -22,10 +23,17 @@ class MyApp2 extends StatelessWidget {
 }
 
 class Auswahl extends StatelessWidget {
-  void navigateToSecondPage(BuildContext context) {
+  void navigateToAbenteuer(BuildContext context) {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => Abenteuertour()),
+    );
+  }
+
+    void navigateToFrei(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => Freietour()),
     );
   }
 
@@ -125,7 +133,7 @@ class Auswahl extends StatelessWidget {
                             elevation: MaterialStateProperty.all(0),
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.white)),
-                        onPressed: () => navigateToSecondPage(context),
+                        onPressed: () => navigateToAbenteuer(context),
                         child: Text(
                           'Abenteuertour',
                           style: TextStyle(
@@ -179,7 +187,7 @@ class Auswahl extends StatelessWidget {
                             elevation: MaterialStateProperty.all(0),
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.white)),
-                        onPressed: () => navigateToSecondPage(context),
+                        onPressed: () {},
                         child: Text(
                           'Kleine Tour',
                           style: TextStyle(
@@ -233,7 +241,7 @@ class Auswahl extends StatelessWidget {
                             elevation: MaterialStateProperty.all(0),
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.white)),
-                        onPressed: () => navigateToSecondPage(context),
+                        onPressed: () {},
                         child: Text(
                           'Große Tour',
                           style: TextStyle(
@@ -287,7 +295,7 @@ class Auswahl extends StatelessWidget {
                             elevation: MaterialStateProperty.all(0),
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.white)),
-                        onPressed: () => navigateToSecondPage(context),
+                        onPressed: () => navigateToFrei(context),
                         child: Text(
                           'Freie Tour',
                           style: TextStyle(

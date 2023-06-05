@@ -1,8 +1,6 @@
 import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
-import 'package:zoo/abenteuermodus.dart';
 import 'package:zoo/audioplayer.dart';
 import 'package:zoo/auswahlmenu.dart';
 import 'package:geolocator/geolocator.dart';
@@ -11,13 +9,7 @@ import 'dart:async';
 const cream = Color(0xFFF8EFE9);
 const orange = Color(0xFFF47B20);
 const dorange = Color(0xFF640000);
-String animalNameOne = '';
-String animalNameTwo = '';
-String animalNameThree = '';
-bool buttonOne = false;
-bool buttonTwo = false;
-bool buttonThree = false;
-bool buttonFour = false;
+String animalName = 'Zwergotter';
 int counter = 0;
 
 void main() {
@@ -43,21 +35,18 @@ class Abenteuertour extends StatefulWidget {
 
 class AbenteuertourClass extends State<Abenteuertour> {
   final _mapController = MapController(initMapWithUserPosition: true);
-
-  List<List<dynamic>> coords = [
-    ['Roter Panda', 51.7987607049, 6.12185299919],
-    ['Maus', 51.7984312277, 6.12212873616],
-  ];
-
+  List<String> animalList = ['Zwergotter','Roter Panda','Trampeltiere','Polarfuchs & Schneeeule ','Weißkopfseeadler','Mäusebussard','Lamas','Erdmännchen','Kurzohrrüsselspringer','Gürteltier','Stachelschwein','Frettchen'];
   @override
+
   void navigateToAudioplayer(BuildContext context) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => Audioplayer()),
+      MaterialPageRoute(
+        builder: (context) => Audioplayer(animalName: animalName)),
     );
   }
 
-    void navigateToAuswahl(BuildContext context) {
+  void navigateToAuswahl(BuildContext context) {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => Auswahl()),
@@ -69,44 +58,23 @@ class AbenteuertourClass extends State<Abenteuertour> {
     super.dispose();
   }
 
-  void checkLocation() {
-    Timer.periodic(new Duration(seconds: 5), (timer) {
-      checkDistance();
-    });
-  }
-
-  void checkDistance() async {
+  void checkLocation() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.bestForNavigation);
-    double distanceEnMetres = 10;
-    for (int i = 0; i < coords.length; i++) {
-      double long = position.longitude;
-      double lati = position.latitude;
-
-      distanceEnMetres = await distance2point(
-          GeoPoint(latitude: lati, longitude: long),
-          GeoPoint(latitude: coords[i][1], longitude: coords[i][2]));
-          print(counter);
-      if (distanceEnMetres <= 500) {
-        if (counter == 0) {
-          animalNameOne = coords[i][0];
-          buttonOne = true;
-          counter++;
-          setState(() {});
-          print(counter);
-        } 
-        else if (counter == 1 && coords[i][0] != animalNameOne) {
-          animalNameTwo = coords[i][0];
-          buttonTwo = true;
-          counter++;
-          setState(() {});
-          print(counter);
-        }
-      }
-    }
   }
 
-  void createButton(String animal) {}
+  void changeProgress(int i) {
+    setState(() {
+      animalName = animalList[counter];
+      if (counter >= 0 && i == 1) {
+        counter += i;
+        animalName = animalList[counter];
+      } else if (counter > 0 && i == -1) {
+        counter += i;
+        animalName = animalList[counter];
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +152,7 @@ class AbenteuertourClass extends State<Abenteuertour> {
           ),
           Flexible(
             child: Container(
-              height: 440,
+              height: 470,
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                 child: OSMFlutter(
@@ -227,68 +195,37 @@ class AbenteuertourClass extends State<Abenteuertour> {
           Padding(
             padding: const EdgeInsets.only(top: 5),
             child: Text(
-              'Tiere in der Nähe',
+              'Nächster Halt:',
               style: TextStyle(
                   fontSize: 20, fontWeight: FontWeight.w400, color: cream),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 15),
+            padding: const EdgeInsets.only(top: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Visibility(
-                  visible: buttonOne,
-                  child: Container(
-                    width: 150,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: cream,
-                      boxShadow: [
-                        BoxShadow(color: cream, spreadRadius: 1),
-                      ],
-                    ),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          elevation: MaterialStateProperty.all(0),
-                          backgroundColor: MaterialStateProperty.all(cream)),
-                      onPressed: () => navigateToAudioplayer(context),
-                      child: Text(
-                        animalNameOne,
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: dorange),
-                      ),
-                    ),
+                Container(
+                  width: 320,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: cream,
+                    boxShadow: [
+                      BoxShadow(color: cream, spreadRadius: 1),
+                    ],
                   ),
-                ),
-                SizedBox(width: 20),
-                Visibility(
-                  visible: buttonTwo,
-                  child: Container(
-                    width: 150,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: cream,
-                      boxShadow: [
-                        BoxShadow(color: cream, spreadRadius: 1),
-                      ],
-                    ),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          elevation: MaterialStateProperty.all(0),
-                          backgroundColor: MaterialStateProperty.all(cream)),
-                      onPressed: () => navigateToAudioplayer(context),
-                      child: Text(
-                        animalNameTwo,
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: dorange),
-                      ),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        elevation: MaterialStateProperty.all(0),
+                        backgroundColor: MaterialStateProperty.all(cream)),
+                    onPressed: () => navigateToAudioplayer(context),
+                    child: Text(
+                      animalName,
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: dorange),
                     ),
                   ),
                 ),
@@ -300,10 +237,58 @@ class AbenteuertourClass extends State<Abenteuertour> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //Ja hier muss noch was hin so nh
+                Container(
+                  width: 155,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: cream,
+                    boxShadow: [
+                      BoxShadow(color: cream, spreadRadius: 1),
+                    ],
+                  ),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        elevation: MaterialStateProperty.all(0),
+                        backgroundColor: MaterialStateProperty.all(cream)),
+                    onPressed: () => changeProgress(-1),
+                    child: Text(
+                      "Back",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: dorange),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Container(
+                  width: 155,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: cream,
+                    boxShadow: [
+                      BoxShadow(color: cream, spreadRadius: 1),
+                    ],
+                  ),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        elevation: MaterialStateProperty.all(0),
+                        backgroundColor: MaterialStateProperty.all(cream)),
+                    onPressed: () => changeProgress(1),
+                    child: Text(
+                      "Skip",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: dorange),
+                    ),
+                  ),
+                ),
               ],
             ),
-          ),
+          )
         ]),
       ),
     );
