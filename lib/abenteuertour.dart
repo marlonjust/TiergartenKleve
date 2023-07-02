@@ -5,12 +5,15 @@ import 'package:zoo/audioplayer.dart';
 import 'package:zoo/auswahlmenu.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
+import 'dart:math';
+import 'package:audioplayers/audioplayers.dart';
 
 const cream = Color(0xFFF8EFE9);
 const orange = Color(0xFFF47B20);
 const dorange = Color(0xFF640000);
 String animalName = 'Zwergotter';
 int counter = 0;
+List<String> zwischen = ["eins"];
 
 void main() {
   runApp(Abenteuertour());
@@ -36,9 +39,11 @@ class Abenteuertour extends StatefulWidget {
 class AbenteuertourClass extends State<Abenteuertour> {
   final _mapController = MapController(initMapWithUserPosition: true);
   List<String> animalList = ['Zwergotter','Roter Panda','Trampeltiere','Polarfuchs & Schneeeule ','Weißkopfseeadler','Mäusebussard','Lamas','Erdmännchen','Kurzohrrüsselspringer','Gürteltier','Stachelschwein','Frettchen'];
+  final audioPlayer = AudioPlayer();
   @override
 
   void navigateToAudioplayer(BuildContext context) {
+    audioPlayer.pause();
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -59,6 +64,7 @@ class AbenteuertourClass extends State<Abenteuertour> {
   }
 
   void checkLocation() async {
+    zwischenSequenzen();
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.bestForNavigation);
   }
@@ -73,6 +79,16 @@ class AbenteuertourClass extends State<Abenteuertour> {
         counter += i;
         animalName = animalList[counter];
       }
+    });
+  }
+
+  void zwischenSequenzen(){
+    Timer.periodic(new Duration(seconds: 60), (timer){
+      final random = Random();
+      String element = zwischen[random.nextInt(zwischen.length)];
+      audioPlayer.setSourceAsset("audios/"+element+".mp3");
+      zwischen.remove(element);
+      audioPlayer.resume();
     });
   }
 
@@ -291,6 +307,53 @@ class AbenteuertourClass extends State<Abenteuertour> {
           )
         ]),
       ),
+    );
+  }
+}
+
+class Overlay extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Image.asset(
+              "assets/images/Appbar Logo.png",
+              fit: BoxFit.contain,
+              height: 40,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 70),
+              child: Row(
+                children: [
+                  Image.asset(
+                    "assets/images/FlagNE.png",
+                    fit: BoxFit.contain,
+                    height: 25,
+                  ),
+                  Image.asset(
+                    "assets/images/FlagGB.png",
+                    fit: BoxFit.contain,
+                    height: 25,
+                  ),
+                  Image.asset(
+                    "assets/images/FlagDE.png",
+                    fit: BoxFit.contain,
+                    height: 25,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        toolbarHeight: 62,
+      ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: Colors.black,
+      )
     );
   }
 }

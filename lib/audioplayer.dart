@@ -46,6 +46,7 @@ class AudioplayerClass extends State<Audioplayer> {
   }
 
   void navigateToSecondPage(BuildContext context) {
+    audioPlayer.pause();
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => Abenteuertour()),
@@ -135,39 +136,29 @@ class AudioplayerClass extends State<Audioplayer> {
                     Row(
                       children: [
                         ElevatedButton(
-                            child: Icon(
-                              Icons.arrow_back,
-                              color: Color(0xFF640000),
-                              size: 40,
-                            ),
                             onPressed: () => navigateToSecondPage(context),
                             style: ButtonStyle(
                                 elevation: MaterialStateProperty.all(0),
                                 backgroundColor: MaterialStateProperty.all(
-                                    Colors.transparent))),
-                        Expanded(
-                          child: Text(
-                            animalName,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w600,
-                                color: dorange),
-                          ),
-                        ),
+                                    Colors.transparent)),
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: Color(0xFF640000),
+                              size: 35,
+                            ))
                       ],
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset("assets/images/"+animalName+".png",
-                              width: double.infinity,
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset("assets/images/$animalName.png",
+                              width: 325,
                               height: 250,
                               fit: BoxFit.cover),
                         ),
-                        SizedBox(height: 32),
+                        SizedBox(height: 25),
                         Text(
                           animalName,
                           style: TextStyle(
