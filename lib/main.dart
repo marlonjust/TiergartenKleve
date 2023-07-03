@@ -42,7 +42,7 @@ class Introduction extends StatelessWidget {
               height: 40,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 70),
+              padding: const EdgeInsets.only(left: 90),
               child: Row(
                 children: [
                   Image.asset(
@@ -87,7 +87,7 @@ class Introduction extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsetsDirectional.fromSTEB(20, 20, 0, 0),
                 child: Container(
                   child: Text(
                     "Heute erwarten dich viele spannende und interessante Fakten über die Bewohner des Tiergartens.",
@@ -100,7 +100,7 @@ class Introduction extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsetsDirectional.fromSTEB(20, 20, 0, 0),
                 child: Container(
                   width: 400,
                   child: Text(
@@ -114,7 +114,7 @@ class Introduction extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 110),
+                padding: const EdgeInsets.only(top: 180),
                 child: Container(
                   width: 150,
                   height: 50,

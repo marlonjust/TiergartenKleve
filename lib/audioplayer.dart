@@ -95,7 +95,7 @@ class AudioplayerClass extends State<Audioplayer> {
                 height: 40,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 70),
+                padding: const EdgeInsets.only(left: 90),
                 child: Row(
                   children: [
                     Image.asset(
@@ -133,76 +133,82 @@ class AudioplayerClass extends State<Audioplayer> {
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        ElevatedButton(
-                            onPressed: () => navigateToSecondPage(context),
-                            style: ButtonStyle(
-                                elevation: MaterialStateProperty.all(0),
-                                backgroundColor: MaterialStateProperty.all(
-                                    Colors.transparent)),
-                            child: Icon(
-                              Icons.arrow_back,
-                              color: Color(0xFF640000),
-                              size: 35,
-                            ))
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Row(
+                        children: [
+                          ElevatedButton(
+                              onPressed: () => navigateToSecondPage(context),
+                              style: ButtonStyle(
+                                  elevation: MaterialStateProperty.all(0),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Colors.transparent)),
+                              child: Icon(
+                                Icons.arrow_back,
+                                color: Color(0xFF640000),
+                                size: 35,
+                              ))
+                        ],
+                      ),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset("assets/images/$animalName.png",
-                              width: 325,
-                              height: 250,
-                              fit: BoxFit.cover),
-                        ),
-                        SizedBox(height: 25),
-                        Text(
-                          animalName,
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                        ),
-                        Slider(
-                          min: 0,
-                          max: duration.inSeconds.toDouble(),
-                          value: position.inSeconds.toDouble(),
-                          activeColor: Color(0xFFF47B20),
-                          inactiveColor: Color.fromARGB(255, 237, 201, 174),
-                          onChanged: (value) async {
-                            final position = Duration(seconds: value.toInt());
-                            await audioPlayer.seek(position);
-
-                            await audioPlayer.resume();
-                          },
-                        ),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(formatTime(position)),
-                                Text(formatTime(duration)),
-                              ],
-                            )),
-                        CircleAvatar(
-                          backgroundColor: Color(0xFF640000),
-                            radius: 35,
-                            child: IconButton(
-                              
-                              icon: Icon(
-                                  isPlaying ? Icons.pause : Icons.play_arrow, color: Color(0xFFF8EFE9)),
-                              iconSize: 50,
-                              onPressed: () async {
-                                if (isPlaying) {
-                                  await audioPlayer.pause();
-                                } else {
-                                  await audioPlayer.resume();
-                                }
-                              },
-                            ))
-                      ],
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(top: 30),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset("assets/images/$animalName.png",
+                                width: 325,
+                                height: 250,
+                                fit: BoxFit.cover),
+                          ),
+                          SizedBox(height: 25),
+                          Text(
+                            animalName,
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
+                          ),
+                          Slider(
+                            min: 0,
+                            max: duration.inSeconds.toDouble(),
+                            value: position.inSeconds.toDouble(),
+                            activeColor: Color(0xFFF47B20),
+                            inactiveColor: Color.fromARGB(255, 237, 201, 174),
+                            onChanged: (value) async {
+                              final position = Duration(seconds: value.toInt());
+                              await audioPlayer.seek(position);
+                    
+                              await audioPlayer.resume();
+                            },
+                          ),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(formatTime(position)),
+                                  Text(formatTime(duration)),
+                                ],
+                              )),
+                          CircleAvatar(
+                            backgroundColor: Color(0xFF640000),
+                              radius: 35,
+                              child: IconButton(
+                                
+                                icon: Icon(
+                                    isPlaying ? Icons.pause : Icons.play_arrow, color: Color(0xFFF8EFE9)),
+                                iconSize: 50,
+                                onPressed: () async {
+                                  if (isPlaying) {
+                                    await audioPlayer.pause();
+                                  } else {
+                                    await audioPlayer.resume();
+                                  }
+                                },
+                              ))
+                        ],
+                      ),
                     ),
                   ],
                 ),

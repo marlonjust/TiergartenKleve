@@ -121,7 +121,7 @@ class FreietourClass extends State<Freietour> {
               height: 40,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 70),
+              padding: const EdgeInsets.only(left: 90),
               child: Row(
                 children: [
                   Image.asset(
@@ -185,7 +185,7 @@ class FreietourClass extends State<Freietour> {
           ),
           Flexible(
             child: Container(
-              height: 440,
+              height: 520,
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                 child: OSMFlutter(

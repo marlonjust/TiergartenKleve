@@ -49,7 +49,7 @@ class Auswahl extends StatelessWidget {
               height: 40,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 70),
+              padding: const EdgeInsets.only(left: 90),
               child: Row(
                 children: [
                   Image.asset(
@@ -153,7 +153,7 @@ class Auswahl extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(Icons.timer, color: orange,size: 40),
-                        Text("2,5h",
+                        Text("1,5 h",
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -207,7 +207,7 @@ class Auswahl extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(Icons.timer, color: orange,size: 40),
-                        Text("2,5h",
+                        Text("1 h",
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,

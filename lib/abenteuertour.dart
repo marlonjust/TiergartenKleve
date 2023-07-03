@@ -13,7 +13,8 @@ const orange = Color(0xFFF47B20);
 const dorange = Color(0xFF640000);
 String animalName = 'Zwergotter';
 int counter = 0;
-List<String> zwischen = ["eins"];
+int zwischencounter = 0;
+List<String> zwischen = ["eins","eins","eins","eins"];
 
 void main() {
   runApp(Abenteuertour());
@@ -83,12 +84,12 @@ class AbenteuertourClass extends State<Abenteuertour> {
   }
 
   void zwischenSequenzen(){
-    Timer.periodic(new Duration(seconds: 60), (timer){
-      final random = Random();
-      String element = zwischen[random.nextInt(zwischen.length)];
+    Timer.periodic(new Duration(seconds: 120), (timer){
+      String element = "eins";
       audioPlayer.setSourceAsset("audios/"+element+".mp3");
       zwischen.remove(element);
       audioPlayer.resume();
+      zwischencounter++;
     });
   }
 
@@ -104,7 +105,7 @@ class AbenteuertourClass extends State<Abenteuertour> {
               height: 40,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 70),
+              padding: const EdgeInsets.only(left: 90),
               child: Row(
                 children: [
                   Image.asset(
@@ -168,7 +169,7 @@ class AbenteuertourClass extends State<Abenteuertour> {
           ),
           Flexible(
             child: Container(
-              height: 470,
+              height: 520,
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                 child: OSMFlutter(
@@ -209,7 +210,7 @@ class AbenteuertourClass extends State<Abenteuertour> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 5),
+            padding: const EdgeInsets.only(top: 10),
             child: Text(
               'Nächster Halt:',
               style: TextStyle(
@@ -217,7 +218,7 @@ class AbenteuertourClass extends State<Abenteuertour> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 5),
+            padding: const EdgeInsets.only(top: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -255,7 +256,7 @@ class AbenteuertourClass extends State<Abenteuertour> {
               children: [
                 Container(
                   width: 155,
-                  height: 20,
+                  height: 30,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: cream,
@@ -280,7 +281,7 @@ class AbenteuertourClass extends State<Abenteuertour> {
                 SizedBox(width: 10),
                 Container(
                   width: 155,
-                  height: 20,
+                  height: 30,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: cream,
